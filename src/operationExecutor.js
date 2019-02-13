@@ -55,13 +55,15 @@ class OperationExecutor {
      * @returns object that contains source objects and their combined and modified clone
      */
     secondTaskExecute(arg) {
+        let obj1 = arg.obj1;
+        let obj2 = arg.obj2;
         let res = {};
 
-        res.obj0 = {...arg.obj1, ...arg.obj2};
+        res.obj0 = {...obj1, ...obj2};
         res.obj0.a = "4:19";
         res.obj0.b = "4:20";
 
-        return res;
+        return {obj1, obj2, res};
     }
 
     /**
@@ -71,10 +73,11 @@ class OperationExecutor {
      * @returns object that contains modified source object
      */
     thirdTaskExecute(arg) {
-        arg.obj1.relatives.forEach(relative => {
+        let res = arg.obj1.relatives;
+        res.forEach(relative => {
             relative.gender = relative.lastName === "Ivanov" ? "male" : "female";
         });
-        return arg;
+        return res;
     }
 
     /**
